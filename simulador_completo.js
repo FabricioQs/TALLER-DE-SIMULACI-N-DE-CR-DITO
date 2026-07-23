@@ -134,6 +134,32 @@ function seleccionarCliente(cedula) {
     }
 }
 
-function buscarClienteCredito(){
+function buscarClienteCredito() {
+    // Tomar el valor ingresado en el campo de cédula usando el utilitarios.js
+    let cedula = recuperaraTexto("buscarCedulaCredito");
 
+    // Buscar el cliente dentro del arreglo de clientes
+    let clienteEncontrado = buscarCliente(cedula);
+
+    // Recuperamos el componente donde vamos a pintar los datos
+    let divDatos = document.getElementById("datosClienteCredito");
+
+    // Evaluar si existe o no
+    if (clienteEncontrado != null) {
+        // Guardamos el cliente en la variable global para usarlo en el cálculo más adelante
+        clienteSeleccionado = clienteEncontrado;
+
+        // Armamos el HTML dinámicamente según el formato de la Parte 3
+        divDatos.innerHTML = 
+            "<h3>Datos del Cliente</h3>" +
+            "<p><strong>Cédula: </strong>" + clienteEncontrado.cedula + "</p>" +
+            "<p><strong>Nombre: </strong>" + clienteEncontrado.nombre + "</p>" +
+            "<p><strong>Apellido: </strong>" + clienteEncontrado.apellido + "</p>" +
+            "<p><strong>Ingresos: </strong>" + clienteEncontrado.ingresos + "</p>" +
+            "<p><strong>Egresos: </strong>" + clienteEncontrado.egresos + "</p>";
+    } else {
+        // Si no existe, limpiamos la variable global y mostramos un mensaje
+        clienteSeleccionado = null;
+        divDatos.innerHTML = "<h3>Cliente no encontrado</h3>";
+    }
 }
