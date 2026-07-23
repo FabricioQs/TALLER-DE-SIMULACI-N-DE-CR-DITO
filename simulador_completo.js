@@ -163,3 +163,48 @@ function buscarClienteCredito() {
         divDatos.innerHTML = "<h3>Cliente no encontrado</h3>";
     }
 }
+
+function calcularCredito() {
+    // Validar que se haya buscado un cliente primero
+    if (clienteSeleccionado == null) {
+        alert("Por favor, busque un cliente válido primero.");
+        return;
+    }
+
+    // Obtener los datos de monto y plazo usando el utilitario.js
+    let monto = recuperarFloat("montoCredito");
+    let plazo = recuperarInt("plazoCredito");
+
+    // Cálculos del crédito
+    let capacidadPago = clienteSeleccionado.ingresos - clienteSeleccionado.egresos;
+    
+    // Asumimos un cálculo de interés simple sobre el monto
+    let interes = monto * (tasaInteres / 100);
+    let totalPagar = monto + interes;
+    let cuotaMensual = totalPagar / plazo;
+
+    // Determinar si es aprobado o rechazado
+    let resultadoTexto = "";
+    let estiloClase = "";
+
+    if (cuotaMensual <= capacidadPago) {
+        resultadoTexto = "APROBADO";
+        estiloClase = "aprobado"; // Clase CSS para verde
+    } else {
+        resultadoTexto = "RECHAZADO";
+        estiloClase = "rechazado"; // Clase CSS para rojo
+    }
+
+    // Mostrar el resultado y aplicar estilos
+    let divResultado = document.getElementById("resultadoCredito");
+    
+    // Armar el texto con las etiquetas <br> 
+    divResultado.innerHTML = 
+        "Capacidad de pago: " + capacidadPago + "<br>" +
+        "Total a pagar: " + totalPagar.toFixed(2) + "<br>" +
+        "Cuota mensual: " + cuotaMensual.toFixed(2) + "<br>" +
+        "RESULTADO: " + resultadoTexto;
+        
+    // Aplicar la clase de estilo (aprobado o rechazado)
+    divResultado.className = estiloClase;
+}
