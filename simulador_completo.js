@@ -22,5 +22,20 @@
     document.getElementById(id).classList.add("activa");
   }
 
+  function guardarTasa() {
+    // Obtener el valor y convertirlo a número usando tu utilitario
+    let tasaIngresada = recuperarInt("tasaInteres");
+
+    // Validar que esté entre 10 y 20
+    if (tasaIngresada >= 10 && tasaIngresada <= 20) {
+        //Si es válido, guardamos en la variable global y mostramos mensaje
+        tasaInteres = tasaIngresada;
+        mostrarTexto("mensajeTasa", "Tasa configurada correctamente: " + tasaInteres + "%");
+    } else {
+        // Si no es válido, mostramos el mensaje de error
+        mostrarTexto("mensajeTasa", "La tasa debe estar entre 10% y 20%");
+    }
+}
+
   
 //Para recuperar o mostrar información usar los métodos de la clase utilitarios, puede agregar métodos adicionales en utilitarios
