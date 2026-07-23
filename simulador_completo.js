@@ -12,6 +12,7 @@ function ocultarSecciones() {
     // Se obtiene cada sección y se le quita la clase "activa"
     document.getElementById("parametros").classList.remove("activa");
     document.getElementById("clientes").classList.remove("activa");
+    document.getElementById("credito").classList.remove("activa");
 }
 
 function mostrarSeccion(id) {
@@ -131,4 +132,8 @@ function seleccionarCliente(cedula) {
         mostrarTextoEnCaja("txtIngresos", clienteEncontrado.ingresos);
         mostrarTextoEnCaja("txtEgresos", clienteEncontrado.egresos);
     }
+}
+
+function buscarClienteCredito(){
+
 }
