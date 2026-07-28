@@ -13,7 +13,11 @@ function ocultarSecciones() {
     document.getElementById("parametros").classList.remove("activa");
     document.getElementById("clientes").classList.remove("activa");
     document.getElementById("credito").classList.remove("activa");
+    document.getElementById("contacto").classList.remove("activa");
+    
 }
+
+
 
 function mostrarSeccion(id) {
     //Invocar ocultarSecciones() para limpiar la pantalla
@@ -44,6 +48,7 @@ function limpiar() {
     mostrarTextoEnCaja("txtApellido", "");
     mostrarTextoEnCaja("txtIngresos", "");
     mostrarTextoEnCaja("txtEgresos", "");
+    mostrarTextoEnCaja("txtCorreo", "");
     
     // Limpiar la variable global de selección
     clienteSeleccionado = null;
@@ -66,6 +71,7 @@ function guardarCliente() {
     let valApellido = recuperaraTexto("txtApellido");
     let valIngresos = recuperarFloat("txtIngresos");
     let valEgresos = recuperarFloat("txtEgresos");
+    let valCorreo = recuperaraTexto("txtCorreo"); 
 
     // Verificar si estamos creando o actualizando
     if (clienteSeleccionado == null) {
@@ -75,7 +81,8 @@ function guardarCliente() {
             nombre: valNombre,
             apellido: valApellido,
             ingresos: valIngresos,
-            egresos: valEgresos
+            egresos: valEgresos,
+            correo: valCorreo
         };
         clientes.push(nuevoCliente);
     } else {
@@ -84,6 +91,7 @@ function guardarCliente() {
         clienteSeleccionado.apellido = valApellido;
         clienteSeleccionado.ingresos = valIngresos;
         clienteSeleccionado.egresos = valEgresos;
+        clienteSeleccionado.correo = valCorreo;
     }
 
     // Al final, repintamos la tabla y limpiamos el formulario
@@ -106,6 +114,7 @@ function pintarClientes() {
         filas += "<td>" + cliente.apellido + "</td>";
         filas += "<td>" + cliente.ingresos + "</td>";
         filas += "<td>" + cliente.egresos + "</td>";
+        filas += "<td>" + cliente.correo + "</td>";
         
         // Botón Actualizar usando la combinación de comillas del archivo de ejemplo
         filas += "<td><button onclick=\"seleccionarCliente('" + cliente.cedula + "')\">Actualizar</button></td>";
@@ -131,6 +140,7 @@ function seleccionarCliente(cedula) {
         mostrarTextoEnCaja("txtApellido", clienteEncontrado.apellido);
         mostrarTextoEnCaja("txtIngresos", clienteEncontrado.ingresos);
         mostrarTextoEnCaja("txtEgresos", clienteEncontrado.egresos);
+        mostrarTextoEnCaja("txtCorreo", clienteEncontrado.correo);
     }
 }
 
@@ -157,6 +167,7 @@ function buscarClienteCredito() {
             "<p><strong>Apellido: </strong>" + clienteEncontrado.apellido + "</p>" +
             "<p><strong>Ingresos: </strong>" + clienteEncontrado.ingresos + "</p>" +
             "<p><strong>Egresos: </strong>" + clienteEncontrado.egresos + "</p>";
+            "<p><strong>Egresos: </strong>" + clienteEncontrado.correo + "</p>";
     } else {
         // Si no existe, limpiamos la variable global y mostramos un mensaje
         clienteSeleccionado = null;
