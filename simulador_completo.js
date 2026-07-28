@@ -254,3 +254,44 @@ function ocultarSecciones() {
     document.getElementById("contacto").classList.remove("activa");
     document.getElementById("listaCreditos").classList.remove("activa");
 }
+
+function buscarCreditos(cedula) {
+    // 1. Crear un arreglo vacío para guardar los resultados
+    let creditosEncontrados = [];
+
+    // 2. Recorrer el arreglo global de créditos
+    for (let i = 0; i < creditos.length; i++) {
+        // Si la cédula del crédito coincide con la que buscamos, lo guardamos
+        if (creditos[i].cedula === cedula) {
+            creditosEncontrados.push(creditos[i]);
+        }
+    }
+
+    // 3. Retornar el arreglo con los resultados
+    return creditosEncontrados;
+}
+
+function pintarCreditos(arregloCreditos) {
+    // Recuperamos el cuerpo de la tabla del historial
+    let tbody = document.getElementById("tablaCreditos");
+    let filas = "";
+
+    // Recorremos el arreglo que llega por parámetro
+    for (let i = 0; i < arregloCreditos.length; i++) {
+        let credito = arregloCreditos[i];
+        
+        filas += "<tr>";
+        filas += "<td>" + credito.cedula + "</td>";
+        filas += "<td>" + credito.nombre + "</td>";
+        filas += "<td>" + credito.apellido + "</td>";
+        filas += "<td>" + credito.monto + "</td>";
+        filas += "<td>" + credito.tasa + "%</td>";
+        filas += "<td>" + credito.plazo + "</td>";
+        // Usamos toFixed(2) para que la cuota se vea con dos decimales
+        filas += "<td>" + credito.cuota.toFixed(2) + "</td>"; 
+        filas += "</tr>";
+    }
+    
+    // Insertamos las filas generadas en el HTML
+    tbody.innerHTML = filas;
+}
