@@ -295,3 +295,15 @@ function pintarCreditos(arregloCreditos) {
     // Insertamos las filas generadas en el HTML
     tbody.innerHTML = filas;
 }
+
+function buscarCreditosCliente() {
+    // 1. Tomar el valor de la cédula desde la caja de texto
+    // (Asegúrate de que el id sea exactamente el del HTML: buscarCedulaListado)
+    let cedula = recuperaraTexto("buscarCedulaListado");
+
+    // 2. Invocar la función buscarCreditos (esto nos devuelve el arreglo filtrado)
+    let creditosFiltrados = buscarCreditos(cedula);
+
+    // 3. Enviar el resultado obtenido a la función pintarCreditos
+    pintarCreditos(creditosFiltrados);
+}
