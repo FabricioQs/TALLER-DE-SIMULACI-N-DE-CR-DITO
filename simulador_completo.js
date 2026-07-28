@@ -14,10 +14,8 @@ function ocultarSecciones() {
     document.getElementById("clientes").classList.remove("activa");
     document.getElementById("credito").classList.remove("activa");
     document.getElementById("contacto").classList.remove("activa");
-    
+    document.getElementById("listaCreditos").classList.remove("activa");
 }
-
-
 
 function mostrarSeccion(id) {
     //Invocar ocultarSecciones() para limpiar la pantalla
@@ -159,15 +157,14 @@ function buscarClienteCredito() {
         // Guardamos el cliente en la variable global para usarlo en el cálculo más adelante
         clienteSeleccionado = clienteEncontrado;
 
-        // Armamos el HTML dinámicamente según el formato de la Parte 3
         divDatos.innerHTML = 
             "<h3>Datos del Cliente</h3>" +
             "<p><strong>Cédula: </strong>" + clienteEncontrado.cedula + "</p>" +
             "<p><strong>Nombre: </strong>" + clienteEncontrado.nombre + "</p>" +
             "<p><strong>Apellido: </strong>" + clienteEncontrado.apellido + "</p>" +
             "<p><strong>Ingresos: </strong>" + clienteEncontrado.ingresos + "</p>" +
-            "<p><strong>Egresos: </strong>" + clienteEncontrado.egresos + "</p>";
-            "<p><strong>Egresos: </strong>" + clienteEncontrado.correo + "</p>";
+            "<p><strong>Egresos: </strong>" + clienteEncontrado.egresos + "</p>" +
+            "<p><strong>Correo: </strong>" + clienteEncontrado.correo + "</p>";
     } else {
         // Si no existe, limpiamos la variable global y mostramos un mensaje
         clienteSeleccionado = null;
@@ -246,14 +243,6 @@ function asignarCredito() {
     alert("Crédito asignado correctamente al cliente " + clienteSeleccionado.nombre);
 }
 
-function ocultarSecciones() {
-    // Se obtiene cada sección y se le quita la clase "activa"
-    document.getElementById("parametros").classList.remove("activa");
-    document.getElementById("clientes").classList.remove("activa");
-    document.getElementById("credito").classList.remove("activa");
-    document.getElementById("contacto").classList.remove("activa");
-    document.getElementById("listaCreditos").classList.remove("activa");
-}
 
 function buscarCreditos(cedula) {
     // 1. Crear un arreglo vacío para guardar los resultados
