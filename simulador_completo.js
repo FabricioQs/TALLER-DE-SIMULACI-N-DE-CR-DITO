@@ -186,36 +186,62 @@ function calcularCredito() {
     let monto = recuperarFloat("montoCredito");
     let plazo = recuperarInt("plazoCredito");
 
+    // Guardamos en las variables globales para usarlas luego en el guardado
+    montoCalculado = monto;
+    plazoCalculado = plazo;
+
     // Cálculos del crédito
     let capacidadPago = clienteSeleccionado.ingresos - clienteSeleccionado.egresos;
     
-    // Asumimos un cálculo de interés simple sobre el monto
     let interes = monto * (tasaInteres / 100);
     let totalPagar = monto + interes;
     let cuotaMensual = totalPagar / plazo;
 
-    // Determinar si es aprobado o rechazado
+    // Guardamos la cuota globalmente
+    cuotaCalculada = cuotaMensual;
+
+    // Determinar si es aprobado o rechazado y controlar el botón
     let resultadoTexto = "";
     let estiloClase = "";
+    let btnAsignar = document.getElementById("btnAsignarCredito");
 
     if (cuotaMensual <= capacidadPago) {
         resultadoTexto = "APROBADO";
         estiloClase = "aprobado"; // Clase CSS para verde
+        btnAsignar.disabled = false; // Se habilita el botón
     } else {
         resultadoTexto = "RECHAZADO";
         estiloClase = "rechazado"; // Clase CSS para rojo
+        btnAsignar.disabled = true; // Se deshabilita el botón
     }
 
     // Mostrar el resultado y aplicar estilos
     let divResultado = document.getElementById("resultadoCredito");
     
-    // Armar el texto con las etiquetas <br> 
     divResultado.innerHTML = 
         "Capacidad de pago: " + capacidadPago + "<br>" +
         "Total a pagar: " + totalPagar.toFixed(2) + "<br>" +
         "Cuota mensual: " + cuotaMensual.toFixed(2) + "<br>" +
         "RESULTADO: " + resultadoTexto;
         
-    // Aplicar la clase de estilo (aprobado o rechazado)
     divResultado.className = estiloClase;
+}
+
+function asignarCredito() {
+    // Crear el objeto con la estructura solicitada
+    let credito = {
+        cedula: clienteSeleccionado.cedula,
+        nombre: clienteSeleccionado.nombre,
+        apellido: clienteSeleccionado.apellido,
+        monto: montoCalculado,
+        tasa: tasaInteres,
+        plazo: plazoCalculado,
+        cuota: cuotaCalculada
+    };
+
+    // Agregar el objeto al arreglo de créditos
+    creditos.push(credito);
+    
+    // Mensaje opcional para saber que funcionó
+    alert("Crédito asignado correctamente al cliente " + clienteSeleccionado.nombre);
 }
