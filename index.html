@@ -11,11 +11,12 @@
    <link rel="stylesheet" href="simulador_completo.css">
 </header>
 
-<nav>
+ <nav>
   <button onclick="mostrarSeccion('parametros')">Parámetros</button>
   <button onclick="mostrarSeccion('clientes')">Clientes</button>
   <button onclick="mostrarSeccion('credito')">Créditos</button>
-</nav>
+  <button onclick="mostrarSeccion('listaCreditos')">Créditos Registrados</button>
+ </nav>
 
 <section id="parametros">
   <h2>Configurar Parámetros</h2>
@@ -38,6 +39,7 @@
   <input type="text" id="txtApellido" placeholder="Apellido">
   <input type="number" id="txtIngresos" placeholder="Ingresos">
   <input type="number" id="txtEgresos" placeholder="Egresos">
+  <input type="text" id="txtCorreo" placeholder="Correo">
 
   <br>
 
@@ -52,6 +54,7 @@
         <th>Apellido</th>
         <th>Ingresos</th>
         <th>Egresos</th>
+        <th>Correo</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -77,11 +80,38 @@
 
   <div id="resultadoCredito"></div>
 
-  <button id="btnSolicitarCredito" onclick="solicitarCredito()" disabled>
-    Solicitar crédito
+  <button id="btnAsignarCredito" onclick="asignarCredito()" disabled>
+    Asignar Crédito
   </button>
 </section>
 
+<section id="contacto">
+  <h2>Kevin Quishpe</h2>
+</section>
+
+<section id="listaCreditos">
+  <h2>Créditos Registrados</h2>
+
+  <input type="text" id="buscarCedulaListado" >
+  <button onclick="buscarCreditosCliente()">Buscar</button>
+  <button onclick="pintarCreditos(creditos)">Ver todos</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Cédula</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Monto</th>
+        <th>Tasa</th>
+        <th>Plazo</th>
+        <th>Cuota</th>
+      </tr>
+    </thead>
+    <tbody id="tablaCreditos">
+    </tbody>
+  </table>
+</section>
 
 
 <script src="simulador_completo.js"></script>
