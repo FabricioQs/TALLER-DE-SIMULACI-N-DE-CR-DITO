@@ -243,32 +243,21 @@ function asignarCredito() {
     alert("Crédito asignado correctamente al cliente " + clienteSeleccionado.nombre);
 }
 
-
 function buscarCreditos(cedula) {
-    // 1. Crear un arreglo vacío para guardar los resultados
     let creditosEncontrados = [];
-
-    // 2. Recorrer el arreglo global de créditos
     for (let i = 0; i < creditos.length; i++) {
-        // Si la cédula del crédito coincide con la que buscamos, lo guardamos
         if (creditos[i].cedula === cedula) {
             creditosEncontrados.push(creditos[i]);
         }
     }
-
-    // 3. Retornar el arreglo con los resultados
     return creditosEncontrados;
 }
 
 function pintarCreditos(arregloCreditos) {
-    // Recuperamos el cuerpo de la tabla del historial
     let tbody = document.getElementById("tablaCreditos");
     let filas = "";
-
-    // Recorremos el arreglo que llega por parámetro
     for (let i = 0; i < arregloCreditos.length; i++) {
         let credito = arregloCreditos[i];
-        
         filas += "<tr>";
         filas += "<td>" + credito.cedula + "</td>";
         filas += "<td>" + credito.nombre + "</td>";
@@ -276,23 +265,14 @@ function pintarCreditos(arregloCreditos) {
         filas += "<td>" + credito.monto + "</td>";
         filas += "<td>" + credito.tasa + "%</td>";
         filas += "<td>" + credito.plazo + "</td>";
-        // Usamos toFixed(2) para que la cuota se vea con dos decimales
-        filas += "<td>" + credito.cuota.toFixed(2) + "</td>"; 
+        filas += "<td>" + credito.cuota.toFixed(2) + "</td>";
         filas += "</tr>";
     }
-    
-    // Insertamos las filas generadas en el HTML
     tbody.innerHTML = filas;
 }
 
 function buscarCreditosCliente() {
-    // 1. Tomar el valor de la cédula desde la caja de texto
-    // (Asegúrate de que el id sea exactamente el del HTML: buscarCedulaListado)
     let cedula = recuperaraTexto("buscarCedulaListado");
-
-    // 2. Invocar la función buscarCreditos (esto nos devuelve el arreglo filtrado)
     let creditosFiltrados = buscarCreditos(cedula);
-
-    // 3. Enviar el resultado obtenido a la función pintarCreditos
     pintarCreditos(creditosFiltrados);
 }
